@@ -28,8 +28,8 @@ var genCmd = &cobra.Command{
 		//00:00:01.000
 
 		if duration == "" {
-			durationCMD := `bc -l <<< "$(ffprobe -loglevel error -of csv=p=0 -show_entries format=duration video.mp4) * 0.5"`
-
+			durationCMD := `bc -l <<< "$(ffprobe -loglevel error -of csv=p=0 -show_entries format=duration %s) * 0.5"`
+			durationCMD = fmt.Sprintf(durationCMD,file)
 			dCmd := exec.Command("bash", "-c", durationCMD)
 
 			cmdOutput, err := dCmd.CombinedOutput()
